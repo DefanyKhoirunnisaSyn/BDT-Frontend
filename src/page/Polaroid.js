@@ -42,7 +42,7 @@ function Polaroid() {
 
   useEffect(() => {
     // Fetch data from API
-    fetch(`https://bdt24-fs046.vercel.app/api/produk/jenis/Polaroid`)
+    fetch(`https://bdt24-fs046.vercel.app/api/produk/jenis/${jenis}`)
       .then(response => response.json())
       .then((data) => {
         console.log(data.data);
@@ -57,7 +57,7 @@ function Polaroid() {
   return (
     <div className="container mx-auto mt-4 px-4">
       <div className="flex justify-between items-center mb-2">
-        <h1 className="text-3xl font-bold text-gray-700">Polaroid</h1>
+        <h1 className="text-3xl font-bold text-gray-700">{jenis}</h1>
         <input
           type="text"
           placeholder="Cari Produk..."
@@ -67,7 +67,7 @@ function Polaroid() {
       <div className="flex items-center mb-4 text-gray-600">
         <span>Home</span>
         <span className="mx-2">&gt;</span>
-        <span>Polaroid</span>
+        <span>{jenis}</span>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {produkData.map(item => (

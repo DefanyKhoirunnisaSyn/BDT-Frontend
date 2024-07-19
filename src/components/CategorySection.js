@@ -19,7 +19,7 @@ import Developer from '../images/icons/developer.png';
 import SemuaProduk from '../images/icons/semua-produk.png';
 
 const categories = [
-  { name: 'Polaroid', link: '/polaroid', icon: Polaroid },
+  { name: 'Polaroid', link: '/produk/jenis/Polaroid', icon: Polaroid },
   { name: 'Cetak Buku', link: '/cetak-buku', icon: CetakBuku },
   { name: 'Cetak Stiker', link: '/cetak-stiker', icon: CetakStiker },
   { name: 'Cetak Poster', link: '/cetak-poster', icon: CetakPoster },

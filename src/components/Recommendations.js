@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Recommendations() {
   const recommendations = [
@@ -36,13 +37,15 @@ function Recommendations() {
       <div className="mt-8 grid grid-cols-4 gap-4">
       {produkData.map(item => (
         <div className="border p-2 rounded-md" key={item.id}>
-        <div className="bg-gray-200 h-32 mb-2">
-          <img src={`https://bdt24-fs046.vercel.app/produk/${item.image}`} alt={item.nama} className="h-full w-full object-cover" />
+          <Link to={`/product-detail/${item._id}`} className="block">
+            <div className="bg-gray-200 h-32 mb-2">
+              <img src={`https://bdt24-fs046.vercel.app/produk/${item.image}`} alt={item.nama} className="h-full w-full object-cover" />
+            </div>
+            <div className='ml-2 justify-start'>{item.nama}</div>
+            <div className="ml-2 mb-4 text-red-500">{item.harga}</div>
+          </Link>
         </div>
-        <div className='ml-2 justify-start'>{item.nama}</div>
-        <div className="ml-2 mb-4 text-red-500">{item.harga}</div>
-  </div>
-))}
+      ))}
 
       </div>
     </div>

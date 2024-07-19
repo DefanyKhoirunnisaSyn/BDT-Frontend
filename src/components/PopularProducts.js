@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function PopularProducts() {
   const [produkData, setProdukData] = useState([]);
@@ -24,12 +25,13 @@ function PopularProducts() {
       <h2 className="my-4 text-center text-yellow-700 font-bold">POPULAR PRODUCTS</h2>
       <div className="grid grid-cols-3 gap-4">
          {produkData.map(item => (
+          <Link to={`/product-detail/${item._id}`} className="block">
         
           <div className="bg-gray-200 h-32 mb-2">
             <img src={`https://bdt24-fs046.vercel.app/produk/${item.image}`} alt={item.nama} className="h-full w-full object-cover" />
           </div>
          
-        
+          </Link>
       ))}
       </div>
     </div>

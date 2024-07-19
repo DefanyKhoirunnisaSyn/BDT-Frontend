@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaHome, FaArrowDown } from 'react-icons/fa';
 import Banner from '../components/Banner';
 import shopeeIcon from '../images/shopee.png';
 import tokopediaIcon from '../images/logo_ig.png';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function ProductDetail() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -28,6 +30,20 @@ function ProductDetail() {
   const toggleDescription = () => {
     setShowDescription(!showDescription);
   };
+
+  const {id} = useParams();
+  const [produkData, setProdukData] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from API
+    fetch(`https://bdt24-fs046.vercel.app/api/produk/${id}`)
+      .then(response => response.json())
+      .then((data) => {
+        // console.log(data.data);
+        setProdukData(data.data.produk);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
 
   return (
     <div className="">
@@ -59,15 +75,15 @@ function ProductDetail() {
             </button>
           </div>
           <div className="ml-6">
-            <h1 className="text-5xl font-bold mb-4">POLAROID</h1>
-            <p className="text-2xl mb-4 font-bold">Rp. 200 *start from</p>
+            <h1 className="text-5xl font-bold mb-4">{produkData.nama}</h1>
+            <p className="text-2xl mb-4 font-bold">{produkData.harga}</p>
             <div className="flex space-x-4 mb-4">
               <button className="bg-[#B0A695] text-white px-6 py-3 rounded text-xl">Pesan Sekarang</button>
               <button className="bg-white text-white rounded w-12 h-12">
-                <img src={shopeeIcon} alt="Shopee" className="w-full h-full" />
+                <a href={produkData.link}><img src={shopeeIcon} alt="Shopee" className="w-full h-full" /></a>
               </button>
               <button className="bg-white text-white rounded w-12 h-12">
-                <img src={tokopediaIcon} alt="Tokopedia" className="w-full h-full" />
+                <a href={produkData.link}><img src={tokopediaIcon} alt="Tokopedia" className="w-full h-full" /></a>
               </button>
             </div>
             <button

@@ -1,5 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 function Polaroid() {
@@ -32,8 +34,21 @@ function Polaroid() {
     { name: 'Cetak Stiker A3+', price: 'Rp. 3.000' },
     { name: 'Cetak Stiker A3+', price: 'Rp. 3.000' },
     { name: 'Cetak Stiker A3+', price: 'Rp. 3.000' },
-    // Tambahkan produk lain sesuai kebutuhan
   ];
+
+  const [produkData, setProdukData] = useState([]);
+
+  const { jenis} = useParams();
+
+  useEffect(() => {
+    // Fetch data from API
+    fetch(`https://bdt24-fs046.vercel.app/api/produk/jenis/Polaroid`)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data.data);
+        setProdukData(data.data.produk);
+      });
+  }, []);
 
   const handleProductClick = () => {
     navigate('/product-detail');
@@ -55,17 +70,17 @@ function Polaroid() {
         <span>Polaroid</span>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {products.map((product, index) => (
-          <div
-            key={index}
-            className="border p-2 mb-10 rounded shadow-sm cursor-pointer"
-            onClick={handleProductClick}
-          >
-            <div className="bg-gray-200 h-48 mb-2"></div>
-            <div className="text-center font-bold">{product.name}</div>
-            <div className="text-center text-red-500">Mulai dari {product.price}</div>
-          </div>
-        ))}
+      {produkData.map(item => (
+        <div className="border p-2 rounded-md" key={item.id}>
+          <Link to={`/product-detail/${item._id}`} className="block">
+            <div className="bg-gray-200 h-32 mb-2">
+              <img src={`https://bdt24-fs046.vercel.app/produk/${item.image}`} alt={item.nama} className="h-full w-full object-cover" />
+            </div>
+            <div className='ml-2 justify-start'>{item.nama}</div>
+            <div className="ml-2 mb-4 text-red-500">{item.harga}</div>
+          </Link>
+        </div>
+      ))}
       </div>
     </div>
   );

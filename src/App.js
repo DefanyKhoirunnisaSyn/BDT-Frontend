@@ -54,8 +54,8 @@ function App() {
             //   <About /> */}
             // </>
           } />
-          <Route path="/polaroid" element={<Polaroid />} />
-          <Route path="/product-detail" element={<ProductDetail />} />
+          <Route path="/produk/jenis/Polaroid" element={<Polaroid />} />
+          <Route path="/product-detail/:id" element={<ProductDetail />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/service" element={<ServiceHoursPage />} />
